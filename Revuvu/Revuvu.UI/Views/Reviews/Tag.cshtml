@@ -1,0 +1,13 @@
+﻿@model Revuvu.UI.Models.ReviewListVM
+
+@{
+    ViewBag.Title = "Tag";
+}
+
+<div class="container">
+    <h2 id="page-header-name">@Model.Tag.TagName</h2>
+    <hr />
+
+    @Html.Partial("_ReviewTemplate")
+
+</div>

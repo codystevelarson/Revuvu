@@ -1,0 +1,109 @@
+﻿@model Revuvu.UI.Models.ReviewVM
+@{
+
+    ViewBag.Title = "EditReview";
+}
+
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=w99zovxxb0j9voz7xuw5letbvk6oud6qyi7qfilb00doaiq0"></script>
+<div class="container">
+    <h2 id="page-header-name">Edit Review</h2>
+
+    @using (Html.BeginForm("EditReview", "Marketing", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Review.ReviewId)
+        <h4>Review Number: @Model.Review.ReviewId</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Review.ReviewTitle, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Review.ReviewTitle, new { @class = "form-control" })
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.Review.ReviewTitle)</span>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Review.Rating, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Review.Rating, new { @class = "form-control", type = "number" })
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.Review.Rating)</span>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Review.DatePublished, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Review.DatePublished, new { @class = "form-control", type = "date" })
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.Review.DatePublished)</span>
+
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Review.DateCreated, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Review.DateCreated, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Category, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Review.CategoryId, Model.CategoryList, "-Choose One-", new { @class = "form-control" })
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.Review.CategoryId)</span>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Review.ReviewBody, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Review.ReviewBody, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Tags</label>
+            <div class="col-md-10">
+                <input type="text" name="newTags" class="form-control" value="" data-role="tagsinput" id="setTags" />
+            </div>
+        </div>
+
+        
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary" value="Register">Edit Review</button>
+            </div>
+        </div>
+    }
+</div>
+
+
+@section Scripts
+    {
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            height: 500,
+            menubar: false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor textcolor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table contextmenu paste code help wordcount'
+            ],
+            toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+            content_css: [
+                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                '//www.tinymce.com/css/codepen.min.css']
+        });
+
+        $(document).ready(function () {
+            setTimeout(function () {
+                @if (Model.TagList != null)
+                {
+                    foreach ( var tag in Model.TagList)
+                    {
+                        @:$('#setTags').tagsinput('add', '@(tag.TagName)');
+                    }
+                }
+            }, 0);
+        })
+    </script>
+
+}
+

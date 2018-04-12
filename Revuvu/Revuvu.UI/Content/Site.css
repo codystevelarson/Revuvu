@@ -1,0 +1,100 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.table{
+    background-color:white;
+    border-radius: 10px;
+}
+
+.revuvu-body {
+    background-image:url(/Images/Layout/dixie.jpg);
+    background-repeat:repeat-y;
+    background-position:center;
+}
+
+#reviewList {
+    background-color: rgba(201, 71, 255, 0.25);
+    border-radius: 10px
+}
+
+#newReviews {
+}
+
+
+#reviews {
+    
+}
+
+#reviewBody{
+    background-color:white;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+#reviewStats {
+    font-size: 14px;
+    font-weight: bold;
+    padding-top:10px;
+}
+
+/*a{
+    color:white;
+}*/
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    background-color: rgba(89, 243, 246, 0.95);
+    
+    font-size: 24px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Tangerine', serif;
+}
+
+.revuvu-nav {
+    background-color: white;
+    border-color: #a02db1
+}
+
+.revuvu-jumbotron {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 15px;
+    margin-bottom: 30px;
+    font-size: 40px;
+    font-weight: 200;
+    line-height: 2.1428571435;
+    color: inherit;
+    background-color: rgba(225, 165, 251, 0.95);
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+#page-header-name{
+    text-align: center;
+}
+
+#reviewTitle {
+    text-align: center;
+}
+

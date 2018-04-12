@@ -1,0 +1,52 @@
+﻿@model Revuvu.UI.Models.ReviewVM
+
+@{
+    ViewBag.Title = "Review";
+}
+
+
+<div class="container">
+    <h2 id="page-header-name">@Model.Review.ReviewTitle</h2>
+    <div class="row">
+        <div class="col-md-2">
+            <p>
+                Up: @Model.Review.UpVotes Down: @Model.Review.DownVotes
+            </p>
+        </div>
+        <div class="col-md-2">
+            <p>
+                Rating: @Model.Review.Rating
+            </p>
+        </div>
+        <div class="col-md-2">
+            <p>
+                Category: @Model.Category.CategoryName
+            </p>
+        </div>
+        <div class="col-md-2">
+            <p style="text-align:center">
+                Date Created: <br /> @Model.Review.DateCreated
+                <br />
+                Date Published: <br /> @Model.Review.DateCreated
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p style="text-align: center">
+                @foreach (var tag in Model.TagList)
+                {
+                    <span>#@tag.TagName </span>
+                }
+            </p>
+        </div>
+    </div>
+    <hr />
+    <h3 style="text-align: center">Review Body</h3>
+    <hr />
+
+    <div class="row">
+        <div id="review-body">
+            @Html.Raw(@Model.Review.ReviewBody)
+        </div>
+    </div>
+</div>
+

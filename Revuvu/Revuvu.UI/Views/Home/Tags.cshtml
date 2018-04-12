@@ -1,0 +1,73 @@
+﻿@model Revuvu.UI.Models.TagVM
+
+@{
+    ViewBag.Title = "Tags";
+}
+
+<div class="container">
+    <h2 id="page-header-name">Tags</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-12">
+            @*<form class="form" id="searchBar">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search Reviews by Tags" id="tagName">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default">Search</button>
+                    </div>
+                </div>
+            </form>*@
+            <div id="tagLinkList">
+                @foreach (var category in Model.TagList)
+                {
+                    <div class="col-md-4" style="padding-bottom: 5px">
+                        <span>@Html.ActionLink(category.TagName, "Tag", "Reviews", new { id = category.TagId }, new { @class = "btn btn-info col-md-12" }) </span>
+                    </div>
+                }
+            </div>
+        </div>
+        @*<div class="row">
+            <div class="col-md-12" id="tagsResults">
+            </div>
+        </div>*@
+    </div>
+</div>
+
+<script>
+    //$(document).ready(function () {
+    //    $('#tagsResults').hide();
+    //    $("#searchBar").submit(function (e) {
+    //        $('#tagsResults').show();
+    //        search();
+    //        return false;
+    //    });
+    //});
+
+    //function search() {
+
+    //    var params;
+
+    //    params = '?tagName=' + $('#tagName').val()
+
+    //    $.ajax({
+
+    //        type: 'GET',
+    //        url: 'http://localhost:57108/api/tags/search' + params,
+    //        success: function (data) {
+    //            $('#tagsResults').empty();
+
+
+    //            $.each(data, function (index, tag) {
+    //                var html = '<button class="btn btn-default">' + tag.TagName + '</button>'
+
+    //                $('#tagsResults').append(html.toString());
+    //            })
+    //        },
+    //        error: function () {
+    //            alert('Error performing search')
+    //        }
+    //    })
+    //}
+
+</script>

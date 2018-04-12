@@ -1,0 +1,71 @@
+﻿@model Revuvu.UI.Models.CategoryVM
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<h2>Categories</h2>
+
+<div class="container">
+
+    @using (Html.BeginForm("AddCategory", "Admin", FormMethod.Post, new { @class = "form", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="row form-group">
+            <div class="col-md-2">
+                @Html.TextBoxFor(m => m.Category.CategoryName, new { type = "text", @class = "form-control" })
+            </div>
+            <div class=" col-md-1">
+                <input type="submit" class="btn btn-primary" value="Add Category" />
+            </div>
+        </div>
+
+    }
+
+
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table" style="font-size:18px">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var category in Model.CategoryList.OrderBy(c => c.CategoryName))
+                    {
+                        <tr>
+                            <td>@category.CategoryId</td>
+                            <td>@category.CategoryName</td>
+
+                            <td class="col-md-6">
+                                @using (Html.BeginForm("EditCategory", "Admin", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                                    <div class="row form-group">
+                                        <div class="col-md-8">
+                                            @*@Html.HiddenFor(m => m.Category.CategoryId, new {value = category.CategoryId })*@
+                                            <input type="hidden" name="CategoryId" id="Category_CategoryId" value="@category.CategoryId" />
+                                            @Html.TextBox("CategoryName", Model.Category.CategoryName, new { type = "text", @class = "form-control" })
+                                        </div>
+                                        <div class=" col-md-2">
+                                            <input type="submit" class="btn btn-info" value="Edit" />
+                                        </div>
+                                    </div>
+                                }
+                            </td>
+                            <td>@Html.ActionLink("Delete", "DeleteCategory", "Admin", new { id = category.CategoryId }, new { @class = "btn btn-danger", onclick = "return confirm('Are you sure you want to delete this category?')" })</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,13 @@
+﻿@model Revuvu.UI.Models.PageVM
+
+@{
+    ViewBag.Title = "Page";
+}
+
+
+<div class="container">
+    <h1 id="page-header-name">@Model.Page.PageTitle</h1>
+    <hr/>
+    @Html.Raw(Model.Page.PageBody)
+</div>
+

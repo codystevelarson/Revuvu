@@ -1,0 +1,64 @@
+﻿@model Revuvu.UI.Models.ReviewListVM
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="container">
+    <h2 id="page-header-name">Marketing</h2>
+    <hr />
+    <div class="col-md-12">
+        @Html.ActionLink("Add Review", "AddReview", "Marketing", null, new { @class = "btn btn-primary btn-lg" })
+        <br />
+
+        <table class="table table-condensed" style="font-size:18px">
+            <thead>
+                <tr>
+                    <th>Review ID</th>
+                    <th>Created By</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Rating</th>
+                    <th>Date Created</th>
+                    <th>Date Published</th>
+                    <th>Up Votes</th>
+                    <th>Down Votes</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var reviewVM in Model.ReviewVMList)
+                {
+                    <tr>
+                        <td>@reviewVM.Review.ReviewId</td>
+                        <td>@reviewVM.Username</td>
+                        <td> <a href='/Marketing/Review/@reviewVM.Review.ReviewId'>@reviewVM.Review.ReviewTitle</a> </td>
+                        <td>@reviewVM.Category.CategoryName</td>
+                        <td>@reviewVM.Review.Rating</td>
+                        <td>@reviewVM.Review.DateCreated.ToString("MM/dd/yyyy")</td>
+                        <td>@reviewVM.Review.DatePublished.ToString("MM/dd/yyyy")</td>
+                        <td>@reviewVM.Review.UpVotes</td>
+                        <td>@reviewVM.Review.DownVotes</td>
+                        @if (User.Identity.Name == reviewVM.Username && reviewVM.Review.IsApproved == false)
+                        {
+                            <td>@Html.ActionLink("Edit", "EditReview", "Marketing", new { id = reviewVM.Review.ReviewId }, new { @class = "btn btn-info" })</td>
+                            <td>@Html.ActionLink("Delete", "DeleteReview", "Marketing", new { id = reviewVM.Review.ReviewId }, new { @class = "btn btn-danger", onclick = "return confirm('Are you sure you want to delete this review?')" })</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                            <td></td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+
+

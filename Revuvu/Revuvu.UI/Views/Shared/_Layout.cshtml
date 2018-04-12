@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html> 
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+</head>
+<body class="revuvu-body">
+    <div class="navbar navbar-fixed-top revuvu-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar" style="color:white"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("~Revuvu~", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Reviews", "Index", "Reviews")</li>
+                    <li>@Html.ActionLink("Categories", "Categories", "Home")</li>
+                    <li>@Html.ActionLink("Tags", "Tags", "Home")</li>
+
+                </ul>
+                <form class="navbar-form navbar-left" role="search" id="searchBar">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="#Tags" id="tagName">
+                    </div>
+                    <button type="submit" class="btn btn-default">Search</button>
+                </form>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" id="tagsResults">
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - CPR&R Associates</p>
+            <p>@Html.ActionLink("Additional Content", "Pages", "Home")</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script src="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.min.js"></script>
+    <script>
+
+                $(document).ready(function () {
+                    $('#tagsResults').hide();
+                    $("#searchBar").submit(function (e) {
+                        $('#tagsResults').show();
+                        search();
+                        return false;
+                    });
+                });
+
+                function search() {
+
+                    var params = '?tagName=' + $('#tagName').val()
+
+                    //nightmare hack from hell, but it works 
+                    var reviewsPath = '@Url.Action("Tag", "Reviews", new { id = UrlParameter.Optional })/'
+
+                    //var reviewsPath = '/Reviews/Tag/'
+
+                    $.ajax({
+
+                        type: 'GET',
+                        url: 'http://localhost:57108/api/tags/search' + params,
+                        success: function (data) {
+                            $('#tagsResults').empty();
+
+
+                            $.each(data, function (index, tag) {
+                                var html = '<a href ="' + reviewsPath + tag.TagId + '"><button class="btn btn-default">' + tag.TagName + '</button></a>'
+
+                                $('#tagsResults').append(html.toString());
+                            })
+
+
+                        },
+                        error: function () {
+                            alert('Error performing search')
+                        }
+                    })
+                }
+
+
+    </script>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

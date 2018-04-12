@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <h2>Admin Index</h2>
+    <hr/>
+
+    <ul>
+        <li>
+            @Html.ActionLink("Reviews", "Reviews", "Admin")
+        </li>
+        <li>
+            @Html.ActionLink("Pages", "Pages", "Admin")
+        </li>
+        <li>
+            @Html.ActionLink("Categories", "Categories", "Admin")
+        </li>
+        <li>
+            @Html.ActionLink("Tags", "Tags", "Admin")
+        </li>
+        <li>
+            @Html.ActionLink("Customize Homepage", "Publish", "Admin")
+        </li>
+        <li>
+            @Html.ActionLink("User List", "Users", "Admin")
+        </li>
+    </ul>
+</div>

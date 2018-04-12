@@ -1,0 +1,94 @@
+﻿@model Revuvu.UI.Models.ReviewListVM
+
+@{
+    ViewBag.Title = "Reviews";
+}
+
+<div class="container">
+    <h2 id="page-header-name">Reviews</h2>
+    <hr />
+    @Html.ActionLink("Add Review", "AddReview", "Admin", null, new { @class = "btn btn-primary btn-lg" })
+
+    <h2>Approved Reviews</h2>
+    <table class="table table-condensed" style="font-size:18px">
+        <thead>
+            <tr>
+                <th>Review ID</th>
+                <th>Created By</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Rating</th>
+                <th>Date Created</th>
+                <th>Publish Date</th>
+                <th>Up Votes</th>
+                <th>Down Votes</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reviewVM in Model.ReviewVMList.Where(r => r.Review.IsApproved == true))
+            {
+            <tr>
+                <td>@reviewVM.Review.ReviewId</td>
+                <td>@reviewVM.Username</td>
+                <td> <a href='/Admin/Review/@reviewVM.Review.ReviewId'>@reviewVM.Review.ReviewTitle</a> </td>
+                <td>@reviewVM.Category.CategoryName</td>
+                <td>@reviewVM.Review.Rating</td>
+                <td>@reviewVM.Review.DateCreated.ToString("MM/dd/yyyy")</td>
+                <td>@reviewVM.Review.DatePublished.ToString("MM/dd/yyyy")</td>
+                <td>@reviewVM.Review.UpVotes</td>
+                <td>@reviewVM.Review.DownVotes</td>
+                <td>@Html.ActionLink("Edit", "EditReview", "Admin", new { id = reviewVM.Review.ReviewId }, new { @class = "btn btn-info" })</td>
+                <td>@Html.ActionLink("Delete", "DeleteReview", "Admin", new { id = reviewVM.Review.ReviewId }, new { @class = "btn btn-danger", onclick = "return confirm('Are you sure you want to delete this review?')" })</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<div class="container">
+
+    <h2>Unapproved Reviews</h2>
+    <table class="table table-condensed" style="font-size:18px">
+        <thead>
+            <tr>
+                <th>Review ID</th>
+                <th>Created By</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Rating</th>
+                <th>Date Created</th>
+                <th>Publish Date</th>
+                <th>Up Votes</th>
+                <th>Down Votes</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reviewVM in Model.ReviewVMList.Where(r => r.Review.IsApproved == false))
+            {
+            <tr>
+                <td>@reviewVM.Review.ReviewId</td>
+                <td>@reviewVM.Username</td>
+                <td> <a href='/Admin/Review/@reviewVM.Review.ReviewId'>@reviewVM.Review.ReviewTitle</a> </td>
+                <td>@reviewVM.Category.CategoryName</td>
+                <td>@reviewVM.Review.Rating</td>
+                <td>@reviewVM.Review.DateCreated.ToString("MM/dd/yyyy")</td>
+                <td>@reviewVM.Review.DatePublished.ToString("MM/dd/yyyy")</td>
+                <td>@reviewVM.Review.UpVotes</td>
+                <td>@reviewVM.Review.DownVotes</td>
+                <td>@Html.ActionLink("Edit", "EditReview", "Admin", new { id = reviewVM.Review.ReviewId }, new { @class = "btn btn-info" })</td>
+                <td>@Html.ActionLink("Delete", "DeleteReview", "Admin", new { id = reviewVM.Review.ReviewId }, new { @class = "btn btn-danger", onclick = "return confirm('Are you sure you want to delete this review?')" })</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+
+</script>

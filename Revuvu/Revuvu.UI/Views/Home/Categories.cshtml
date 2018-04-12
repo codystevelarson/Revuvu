@@ -1,0 +1,27 @@
+﻿@model Revuvu.UI.Models.CategoryVM
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<div class="container">
+    <h2 id="page-header-name">Categories</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="categoryLinkList">
+                @foreach (var category in Model.CategoryList)
+                {
+                    <div class="col-md-4" style="padding-bottom: 5px">
+                        <span>@Html.ActionLink(category.CategoryName, "Category", "Reviews", new { id = category.CategoryId }, new { @class = "btn btn-info col-md-12" }) </span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+

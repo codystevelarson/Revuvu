@@ -1,0 +1,62 @@
+﻿@model Revuvu.Models.Tables.Pages
+@{
+    ViewBag.Title = "EditPage";
+}
+
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=w99zovxxb0j9voz7xuw5letbvk6oud6qyi7qfilb00doaiq0"></script>
+
+<h2 id="page-header-name">Edit Page</h2>
+
+@using (Html.BeginForm("EditPage", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.HiddenFor(m => m.PageId)
+    @Html.AntiForgeryToken()
+    <h4>Edit page number: @Model.PageId</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.PageTitle, "Page Title", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.PageTitle, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PageBody, "Page Body", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.PageBody, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-pri" value="Register">Edit Page</button>
+        </div>
+    </div>
+
+
+}
+
+@section Scripts
+    {
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            height: 500,
+            menubar: false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor textcolor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table contextmenu paste code help wordcount'
+            ],
+            toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+            content_css: [
+                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                '//www.tinymce.com/css/codepen.min.css']
+        });
+
+
+    </script>
+
+}
+

@@ -1,0 +1,56 @@
+﻿@model Revuvu.UI.Models.ReviewListVM
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="revuvu-jumbotron">
+    <h1 style="text-align: center; font-weight: bold">Revuvu!</h1>
+    <p style="text-align: center">Welcome to my <span style="font-weight: bold">AWESOME!</span> 1990's review site :)</p>
+</div>
+<hr />
+<h1 id="page-header-name">New Reviews</h1>
+<hr />
+<div id="reviewList">
+    @foreach (var review in Model.ReviewVMList)
+    {
+        <div id="newReviews">
+
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="reviewTitle">
+                        <h3>@review.Review.ReviewTitle</h3>
+                        <p>@review.Review.DatePublished.ToString("MM/dd/yyyy")</p>
+                    </div>
+                    <div id="reviewBody">
+                        @Html.Raw(review.Review.ReviewBody)
+                    </div>
+                    <div id="reviewStats">
+                        <div class="col-md-4">
+                            <p>Rating: @review.Review.Rating</p>
+                            <p>Up: @review.Review.UpVotes Down:@review.Review.DownVotes</p>
+                        </div>
+                        <div class="col-md-4 col-md-offset-4">
+                            <p>Category: @review.Category.CategoryName</p>
+                            <p>
+                                Tags:
+                                @foreach (var tag in review.TagList)
+                                {
+                                    <span> #@tag.TagName </span>
+
+                                }
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+
+
+    }
+
+</div>
+
+

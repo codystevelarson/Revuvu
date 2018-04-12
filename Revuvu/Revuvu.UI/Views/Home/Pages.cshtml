@@ -1,0 +1,21 @@
+﻿@model Revuvu.UI.Models.PageVM
+
+@{
+    ViewBag.Title = "Pages";
+}
+
+<div class="container">
+    <h2 id="page-header-name">Pages</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            @foreach (var page in Model.Pages)
+            {
+                <div class="col-md-2">
+                    <p>@Html.ActionLink(page.PageTitle, "Page", "Home", new { id = page.PageId }, new { @class = "btn btn-info col-md-12" })</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

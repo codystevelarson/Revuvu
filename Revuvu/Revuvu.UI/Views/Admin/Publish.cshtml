@@ -1,0 +1,53 @@
+﻿@model Revuvu.UI.Models.LayoutVM
+
+@{
+    ViewBag.Title = "Publish";
+}
+
+
+<h2 id="page-header-name">Beta feature in development. Check back soon! :)</h2>
+
+<div style="display:none">
+    <h2 id="page-header-name">Publish</h2>
+
+    @Html.ActionLink("Add Layout", "AddLayout", "Admin", null, new { @class = "btn btn-primary btn-lg" })
+    <hr />
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Layouts:</h3>
+        </div>
+        <div class="table-responsive">
+            <div class="col-md-12">
+                <table class=" table table-hover">
+                    <thead style="font-weight:bold">
+                        <tr>
+                            <td align="left">LayoutId</td>
+                            <td align="left">Layout Name</td>
+                            <td align="left">Header Title</td>
+                            <td align="left">Color-Main</td>
+                            <td align="left">Color-Secondary</td>
+                            <td align="left">Logo File Name</td>
+                            <td align="left"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var l in Model.Layouts)
+                        {
+                            <tr class="table-primary">
+                                <td>@l.LayoutId</td>
+                                <td><a href='/Admin/Layout/@l.LayoutId'>@l.LayoutName</a></td>
+                                <td>@l.HeaderTitle</td>
+                                <td>@l.ColorMain</td>
+                                <td>@l.ColorSecondary</td>
+                                <td>@l.LogoImageFile</td>
+                                <td align="right">@Html.ActionLink("Edit", "EditLayout", new { id = l.LayoutId }, new { @class = "btn btn-warning" })</td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

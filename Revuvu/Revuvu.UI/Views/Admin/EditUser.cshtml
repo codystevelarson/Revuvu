@@ -1,0 +1,60 @@
+﻿@model Revuvu.UI.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "EditUser";
+}
+
+<h2>EditUser</h2>
+
+@using (Html.BeginForm("EditUser", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.HiddenFor(m => Model.Id)
+
+    @Html.AntiForgeryToken()
+    <h4>Create a new user.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.Username, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PasswordEdit, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.PasswordEdit, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPasswordEdit, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.ConfirmPasswordEdit, new { @class = "form-control" })
+        </div>
+    </div>
+    if (User.Identity.Name != Model.Username)
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Role, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Role, Model.Roles, new { @class = "form-control" })
+            </div>
+        </div>
+    }
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Save" />
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
